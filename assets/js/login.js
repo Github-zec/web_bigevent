@@ -1,19 +1,3 @@
-// document.addEventListener('DOMContentLoaded',function(){
-//     var login_box = document.querySelector('.login-box');
-//     var reg_box = document.querySelector('.reg-box');
-//     var link_reg = document.querySelector('#link-reg'); 
-//     var link_login = document.querySelector('#link-login'); 
-
-//     link_reg.addEventListener('click',function(){
-//         login_box.style = 'display:none';
-//         reg_box.style = 'display:block';
-//     })
-//     link_login.addEventListener('click',function(){
-//         login_box.style = 'display:block';
-//         reg_box.style = 'display:none';
-//     })
-// })
-
 $(function(){
     $('#link_reg').on('click',function(){
         
@@ -47,7 +31,7 @@ $(function(){
         e.preventDefault();
         //发起ajax请求
         var data = {username:$('.reg-box [name=username]').val(),password:$('.reg-box [name=password]').val()}
-        $.post('http://www.liulongbin.top:3007/api/reguser',data,function(res){
+        $.post('/api/reguser',data,function(res){
             if(res.status !== 0){
                 return layer.msg(res.message);;
             }
@@ -69,7 +53,7 @@ $(function(){
             //将登录成功得到得token字符串保存到localStorage中
             localStorage.setItem('token',res.token)
             //跳转到主页
-            // location.href='/index.html'
+            location.href='/index.html'
         })
     })
 })
