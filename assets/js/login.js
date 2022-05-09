@@ -45,15 +45,21 @@ $(function(){
     $('#form_login').on('submit',function(e){
         e.preventDefault();
         var data = $(this).serialize();
-        $.post('/api/login',data,function(res){
-            if(res.status !== 0){
-                return layer.msg('登陆失败')
+        $.ajax({
+            method:'POST',
+            url:'/api/login',
+            data:data,
+            success:function(res){
+                console.log(res);
+                if(res.status !== 0){
+                    return layer.msg('登陆失败')
+                }
+                layer.msg('登录成功')
+                //将登录成功得到得token字符串保存到localStorage中
+                localStorage.setItem('token',res.token)
+                //跳转到主页
+                location.href='/index.html'
             }
-            layer.msg('登录成功')
-            //将登录成功得到得token字符串保存到localStorage中
-            localStorage.setItem('token',res.token)
-            //跳转到主页
-            location.href='/index.html'
-        })
+        })            
     })
 })
